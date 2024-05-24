@@ -1,0 +1,26 @@
+{
+  "name": "@bentonow/bento-nextjs-sdk",
+  "version": "0.0.1",
+  "description": "🍱 Bento Next.JS SDK and tracking library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bentonow/bento-nextjs-sdk.git"
+  },
+  "keywords": [
+    "bento",
+    "typescript",
+    "nextjs"
+  ],
+  "author": "Backpack Internet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bentonow/bento-nextjs-sdk/issues"
+  },
+  "homepage": "https://bentonow.com",
+  "dependencies": {},
+  "devDependencies": {}
+}
