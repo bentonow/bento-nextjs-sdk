@@ -31,10 +31,8 @@ export function Layout({
   return (
     <>
       <Header />
-      <Container className="h-full w-full">
-        <main className="h-full rounded border border-gray-800">
-          {children}
-        </main>
+      <Container className="relative mx-auto h-full w-full max-w-lg">
+        <main className="h-full rounded">{children}</main>
       </Container>
       {showFooter && <Footer />}
     </>

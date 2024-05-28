@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bentonow/bento-node-sdk": "^0.2.1",
     "clsx": "^2.1.1",
     "next": "14.2.3",
     "react": "^18",
