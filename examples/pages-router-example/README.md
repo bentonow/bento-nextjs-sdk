@@ -1,4 +1,4 @@
-# Bento Next.js App Router Example
+# Bento Next.js Pages Router Example
 
 Demo application showing how to track events, update data, send transactional email and more.
 

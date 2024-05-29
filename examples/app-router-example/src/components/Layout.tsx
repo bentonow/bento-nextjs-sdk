@@ -13,7 +13,7 @@ export function Layout({
   children: React.ReactNode
   showFooter?: boolean
 }) {
-  const pathname = usePathname
+  const pathname = usePathname()
 
   useEffect(() => {
     setTimeout(() => {
