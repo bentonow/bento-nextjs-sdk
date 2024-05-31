@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react'
 import Script from 'next/script'
-import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 declare global {
   interface Window {
@@ -13,26 +13,39 @@ declare global {
   }
 }
 
-type BentoAnalyticsProps = {
+type BentoLegacyAnalyticsProps = {
   siteUuid: string
   userEmail?: string
 }
 
-export function BentoAnalytics({ siteUuid, userEmail }: BentoAnalyticsProps) {
-  const pathname = usePathname()
+export function BentoLegacyAnalytics({
+  siteUuid,
+  userEmail,
+}: BentoLegacyAnalyticsProps) {
+  const router = useRouter()
 
   useEffect(() => {
     const trackPageView = () => {
       if (window.bento !== undefined) {
         if (userEmail) {
+          console.log('User:', userEmail)
           window.bento.identify(userEmail)
         }
+        console.log('Page view', router.pathname)
         window.bento.view()
       }
     }
 
-    setTimeout(trackPageView, 0)
-  }, [pathname, userEmail])
+    const onRouteChangeComplete = () => {
+      setTimeout(trackPageView, 0)
+    }
+
+    router.events.on('routeChangeComplete', onRouteChangeComplete)
+
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete)
+    }
+  }, [router, userEmail])
 
   return (
     <>
