@@ -1,2 +1,2 @@
-export { BentoAnalytics } from './client/BentoAnalytics'
-export { BentoLegacyAnalytics } from './client/BentoLegacyAnalytics'
+export * from './analytics'
+export * from './analytics/legacy'

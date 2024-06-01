@@ -1,6 +1,6 @@
 {
   "name": "snowmelt-nextjs-sdk",
-  "version": "0.0.1-rc7",
+  "version": "0.0.1-rc10",
   "description": "🍱 Bento Next.JS SDK and tracking library",
   "types": "./dist/types/index.d.ts",
   "exports": {
@@ -10,14 +10,14 @@
       "require": "./dist/cjs/index.js"
     },
     "./analytics": {
-      "types": "./dist/types/client/BentoAnalytics.d.ts",
-      "import": "./dist/esm/client/BentoAnalytics.js",
-      "require": "./dist/cjs/client/BentoAnalytics.js"
+      "types": "./dist/types/analytics/index.d.ts",
+      "import": "./dist/esm/analytics/index.js",
+      "require": "./dist/cjs/analytics/index.js"
     },
     "./analytics/legacy": {
-      "types": "./dist/types/client/BentoLegacyAnalytics.d.ts",
-      "import": "./dist/esm/client/BentoLegacyAnalytics.js",
-      "require": "./dist/cjs/client/BentoLegacyAnalytics.js"
+      "types": "./dist/types/analytics/legacy/index.d.ts",
+      "import": "./dist/esm/analytics/legacy/index.js",
+      "require": "./dist/cjs/analytics/legacy/index.js"
     }
   },
   "files": [

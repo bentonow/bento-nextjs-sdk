@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import clsx from 'clsx'
-import { BentoAnalytics } from '../../../../dist/esm/index'
+import { BentoAnalytics, useBentoAnalytics } from '../../../../dist/esm/index'
 
 import './globals.css'
 
