@@ -20,7 +20,7 @@ This SDK includes components and hooks that simplify adding Bento analytics to y
 
 Optionally, pass the active user's email address to identify them before tracking the page view.
 
-Note, Next.js changed how it reports page changes, so make sure you use the right component or hook depending on which Next.js major version you're using.
+Note: when upgrading to version 13, Next.js changed how it reports page changes, so make sure you use the right component or hook depending on which Next.js major version you're using.
 
 ```jsx
 // Next.js 13+
@@ -38,7 +38,7 @@ import { BentoLegacyAnalytics } from '@bentonow/bento-nextjs-sdk/analytics/legac
 
 If you'd like to customize how you integrate Bento into your Next.js application, you can do the following:
 
-1. Load the Bento.js script using the Next.js script component
+1. Load the Bento.js script using the Next.js script component to add the following to the header of every page. This will only load the script ONCE but trigger the first page view.
 
 ```jsx
 <Script
@@ -61,7 +61,7 @@ declare global {
 }
 ```
 
-3. Track page views
+3. Track page views when the route changes
 
 ```jsx
 // Next.js 13+
