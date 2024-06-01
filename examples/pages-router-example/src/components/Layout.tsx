@@ -1,7 +1,7 @@
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Container } from './Container'
-import { BentoLegacyAnalytics } from '../../../../dist/client/BentoLegacyAnalytics'
+import { BentoLegacyAnalytics } from '../../../../dist/esm/client/BentoLegacyAnalytics'
 
 export function Layout({
   children,
@@ -12,7 +12,10 @@ export function Layout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <BentoLegacyAnalytics siteUuid={process.env.NEXT_PUBLIC_BENTO_SITE_ID!} />
+      <BentoLegacyAnalytics
+        siteUuid={process.env.NEXT_PUBLIC_BENTO_SITE_ID!}
+        userEmail={''}
+      />
       <Header />
       <Container className="relative mx-auto h-full w-full max-w-lg flex-grow">
         <main className="h-full rounded">{children}</main>
