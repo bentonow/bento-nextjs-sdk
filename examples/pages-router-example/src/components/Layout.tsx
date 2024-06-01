@@ -1,7 +1,8 @@
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Container } from './Container'
-import { BentoLegacyAnalytics } from '../../../../dist/esm/client/BentoLegacyAnalytics'
+// TODO: Import from npm when the package is published
+import { BentoLegacyAnalytics } from '../../../../dist/esm/analytics/legacy'
 
 export function Layout({
   children,

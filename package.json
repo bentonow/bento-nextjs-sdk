@@ -1,6 +1,6 @@
 {
-  "name": "snowmelt-nextjs-sdk",
-  "version": "0.0.1-rc10",
+  "name": "@bentonow/bento-nextjs-sdk",
+  "version": "0.0.1-rc1",
   "description": "🍱 Bento Next.JS SDK and tracking library",
   "types": "./dist/types/index.d.ts",
   "exports": {
