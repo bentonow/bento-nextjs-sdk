@@ -14,11 +14,15 @@ Run the following comamnd in your project:
 npm install @bentonow/bento-nextjs-sdk --save
 ```
 
+Optionally, install the [Bento Node SDK](https://github.com/bentonow/bento-node-sdk) to integrate Bento into any server-side code in your app (API routes, server actions, etc).
+
 ## Getting Started
 
 This SDK includes components and hooks that simplify adding Bento analytics to your Next.js application. To track page views and load the Bento.js script, add the Bento analytics component at the top level of your site (e.g. `layout.tsx` or `_app.tsx`).
 
 Optionally, pass the active user's email address to identify them before tracking the page view.
+
+See the [Bento script documentation](https://docs.bentonow.com/platform/bento-js-tracking-script) for more information.
 
 Note: when upgrading to version 13, Next.js changed how it reports page changes, so make sure you use the right component or hook depending on which Next.js major version you're using.
 
@@ -48,7 +52,7 @@ If you'd like to customize how you integrate Bento into your Next.js application
 />
 ```
 
-2. Define the global Bento types
+2. If you're using TypeScript, define the global Bento types
 
 ```typescript
 declare global {
@@ -56,6 +60,7 @@ declare global {
     bento?: {
       view: () => void
       identify: (email: string) => void
+      track: (event: string, data?: Record<string, any>) => void
     }
   }
 }
@@ -75,6 +80,34 @@ import { useBentoLegacyAnalytics } from '@bentonow/bento-nextjs-sdk/analytics/le
 useBentoLegacyAnalytics(userEmail)
 ```
 
+## Examples
+
+### Track
+
+Client side:
+
+```javascript
+window.bento.track('optin', { organisation_name: 'Team Rocket' })
+window.bento.track('demo')
+window.bento.track('download')
+```
+
+Server side:
+
+```javascript
+import { Analytics } from '@bentonow/bento-node-sdk'
+
+const bento = new Analytics({ ...your configuration })
+
+await bento.V1.track({
+  email: '',
+  type: 'optint',
+  fields: {
+    organisation_name: 'Team Rocket'
+  }
+})
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/bentonow/bento-nextjs-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
@@ -82,3 +115,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/benton
 ## License
 
 The package is available as open source under the terms of the MIT License.
+
+```
+
+```
