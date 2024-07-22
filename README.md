@@ -61,6 +61,7 @@ declare global {
       view: () => void
       identify: (email: string) => void
       track: (event: string, data?: Record<string, any>) => void
+      tag: (tag: string) => void
     }
   }
 }
@@ -90,6 +91,7 @@ Client side:
 window.bento.track('optin', { organisation_name: 'Team Rocket' })
 window.bento.track('demo')
 window.bento.track('download')
+window.bento.tag('customer')
 ```
 
 Server side:

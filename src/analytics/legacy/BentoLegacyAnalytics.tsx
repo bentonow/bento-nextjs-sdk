@@ -10,6 +10,7 @@ declare global {
       view: () => void
       identify: (email: string) => void
       track: (event: string, data?: Record<string, any>) => void
+      tag: (tag: string) => void
     }
   }
 }
