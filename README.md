@@ -52,7 +52,7 @@ If you'd like to customize how you integrate Bento into your Next.js application
 />
 ```
 
-2. If you're using TypeScript, define the global Bento types
+2. If you're using TypeScript, define the global Bento types. Please see `src/types.ts` for the full Bento JS SDK type definition.
 
 ```typescript
 declare global {
@@ -62,6 +62,7 @@ declare global {
       identify: (email: string) => void
       track: (event: string, data?: Record<string, any>) => void
       tag: (tag: string) => void
+      ...
     }
   }
 }
