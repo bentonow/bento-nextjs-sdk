@@ -1,5 +1,5 @@
 
-<p align="center"><img src="/art/bento-nextjs-sdk.png" alt="Bento Next.js SDK"></p>
+![logo](https://app.bentonow.com/brand/logoanim.gif)
 
 > [!TIP]
 > Need help? Join our [Discord](https://discord.gg/ssXXFRmt5F) or email jesse@bentonow.com for personalized support.
