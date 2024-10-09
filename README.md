@@ -1,124 +1,156 @@
-# Bento SDK for Next.JS
 
-🍱 Simple, powerful analytics for Next.JS projects!
+<p align="center"><img src="/art/bento-nextjs-sdk.png" alt="Bento Next.js SDK"></p>
 
-Track events, update data, record LTV and more. Data is stored in your Bento account so you can easily research and investigate what's going on.
+> [!TIP]
+> Need help? Join our [Discord](https://discord.gg/ssXXFRmt5F) or email jesse@bentonow.com for personalized support.
 
-👋 To get personalized support, please tweet @bento or email jesse@bentonow.com!
+The Bento Next.js SDK makes it quick and easy to build an excellent analytics experience in your Next.js application. We provide powerful and customizable components and hooks that can be used out-of-the-box to track your users' behavior and manage analytics. We also expose low-level APIs so that you can build fully custom experiences.
 
-## Installation
+Get started with our [📚 integration guides](https://docs.bentonow.com), or [📘 browse the SDK reference](https://docs.bentonow.com/subscribers).
 
-Run the following comamnd in your project:
+Table of contents
+=================
+
+<!--ts-->
+* [Features](#features)
+* [Requirements](#requirements)
+* [Getting started](#getting-started)
+    * [Installation](#installation)
+    * [Configuration](#configuration)
+* [Modules](#modules)
+* [Things to Know](#things-to-know)
+* [Contributing](#contributing)
+* [License](#license)
+<!--te-->
+
+## Features
+
+* **Easy integration**: Quickly add Bento analytics to your Next.js application with pre-built components.
+* **Page view tracking**: Automatically track page views across your Next.js application.
+* **User identification**: Easily identify users for more detailed analytics.
+* **Custom event tracking**: Track custom events both on the client-side and server-side.
+* **Next.js version support**: Compatible with both Next.js 13+ and legacy versions.
+* **Server-side integration**: Optional server-side tracking with the Bento Node SDK.
+
+## Requirements
+
+- Next.js 12.0+ (with specific support for 13+)
+- Node.js 14+
+- Bento Account for a valid **SITE_UUID**
+
+## Getting started
+
+### Installation
+
+Install the Bento Next.js SDK:
 
 ```bash
 npm install @bentonow/bento-nextjs-sdk --save
 ```
 
-Optionally, install the [Bento Node SDK](https://github.com/bentonow/bento-node-sdk) to integrate Bento into any server-side code in your app (API routes, server actions, etc).
+Optionally, install the Bento Node SDK for server-side integration:
 
-## Getting Started
+```bash
+npm install @bentonow/bento-node-sdk --save
+```
 
-This SDK includes components and hooks that simplify adding Bento analytics to your Next.js application. To track page views and load the Bento.js script, add the Bento analytics component at the top level of your site (e.g. `layout.tsx` or `_app.tsx`).
+### Configuration
 
-Optionally, pass the active user's email address to identify them before tracking the page view.
+Add the Bento analytics component to your top-level layout:
 
-See the [Bento script documentation](https://docs.bentonow.com/platform/bento-js-tracking-script) for more information.
-
-Note: when upgrading to version 13, Next.js changed how it reports page changes, so make sure you use the right component or hook depending on which Next.js major version you're using.
+For Next.js 13+:
 
 ```jsx
-// Next.js 13+
 import { BentoAnalytics } from '@bentonow/bento-nextjs-sdk/analytics'
 
-<BentoAnalytics siteUuid={process.env.NEXT_PUBLIC_BENTO_SITE_ID!} userEmail={''} />
-
-// Next.js 12 (legacy)
-import { BentoLegacyAnalytics } from '@bentonow/bento-nextjs-sdk/analytics/legacy'
-
-<BentoLegacyAnalytics siteUuid={process.env.NEXT_PUBLIC_BENTO_SITE_ID!} userEmail={''} />
-```
-
-### Custom setup
-
-If you'd like to customize how you integrate Bento into your Next.js application, you can do the following:
-
-1. Load the Bento.js script using the Next.js script component to add the following to the header of every page. This will only load the script ONCE but trigger the first page view.
-
-```jsx
-<Script
-  id="bento-script"
-  src={`https://fast.bentonow.com?site_uuid=${siteUuid}`}
-  strategy="afterInteractive"
-/>
-```
-
-2. If you're using TypeScript, define the global Bento types. Please see `src/types.ts` for the full Bento JS SDK type definition.
-
-```typescript
-declare global {
-  interface Window {
-    bento?: {
-      view: () => void
-      identify: (email: string) => void
-      track: (event: string, data?: Record<string, any>) => void
-      tag: (tag: string) => void
-      ...
-    }
-  }
+export default function Layout({ children }) {
+  return (
+    <html>
+      <body>
+        <BentoAnalytics siteUuid={process.env.NEXT_PUBLIC_BENTO_SITE_ID!} userEmail={''} />
+        {children}
+      </body>
+    </html>
+  )
 }
 ```
 
-3. Track page views when the route changes
+For Next.js 12 (legacy):
+
+```jsx
+import { BentoLegacyAnalytics } from '@bentonow/bento-nextjs-sdk/analytics/legacy'
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <BentoLegacyAnalytics siteUuid={process.env.NEXT_PUBLIC_BENTO_SITE_ID!} userEmail={''} />
+      <Component {...pageProps} />
+    </>
+  )
+}
+```
+
+## Modules
+
+### Page View Tracking
+
+Automatically track page views:
 
 ```jsx
 // Next.js 13+
 import { useBentoAnalytics } from '@bentonow/bento-nextjs-sdk/analytics'
 
-useBentoAnalytics(userEmail)
+export default function Layout({ children }) {
+  useBentoAnalytics(userEmail)
+  return <>{children}</>
+}
 
 // Next.js 12 (legacy)
 import { useBentoLegacyAnalytics } from '@bentonow/bento-nextjs-sdk/analytics/legacy'
 
-useBentoLegacyAnalytics(userEmail)
+function MyApp({ Component, pageProps }) {
+  useBentoLegacyAnalytics(userEmail)
+  return <Component {...pageProps} />
+}
 ```
 
-## Examples
+### Custom Event Tracking
 
-### Track
-
-Client side:
+Track custom events on the client-side:
 
 ```javascript
 window.bento.track('optin', { organisation_name: 'Team Rocket' })
-window.bento.track('demo')
-window.bento.track('download')
 window.bento.tag('customer')
 ```
 
-Server side:
+Track custom events on the server-side:
 
 ```javascript
 import { Analytics } from '@bentonow/bento-node-sdk'
 
-const bento = new Analytics({ ...your configuration })
+const bento = new Analytics({ /* your configuration */ })
 
 await bento.V1.track({
-  email: '',
-  type: 'optint',
+  email: 'user@example.com',
+  type: 'optin',
   fields: {
     organisation_name: 'Team Rocket'
   }
 })
 ```
 
+## Things to Know
+
+1. The SDK provides different components for Next.js 13+ and legacy versions.
+2. Page view tracking is automatic when using the provided components and hooks.
+3. User identification can be done by passing the user's email to the analytics components or hooks.
+4. The SDK supports both client-side and server-side event tracking.
+5. For more advanced usage, you can customize the integration using the Next.js Script component.
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/bentonow/bento-nextjs-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+We welcome contributions! Please see our [contributing guidelines](CODE_OF_CONDUCT.md) for details on how to submit pull requests, report issues, and suggest improvements.
 
 ## License
 
-The package is available as open source under the terms of the MIT License.
-
-```
-
-```
+The Bento SDK for Next.js is available as open source under the terms of the [MIT License](LICENSE.md).
