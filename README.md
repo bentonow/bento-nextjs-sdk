@@ -1,6 +1,8 @@
 
 ![logo](https://app.bentonow.com/brand/logoanim.gif)
 
+# Bento Next.js SDK
+
 > [!TIP]
 > Need help? Join our [Discord](https://discord.gg/ssXXFRmt5F) or email jesse@bentonow.com for personalized support.
 
